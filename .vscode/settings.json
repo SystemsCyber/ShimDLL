@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "loaddll.h": "c",
+        "stdio.h": "c",
+        "xstring": "c"
+    }
+}
