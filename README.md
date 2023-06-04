@@ -7,8 +7,8 @@ Another program builds a ShimDLL that interfaces with a Python program to perfor
 Here are the brief steps to get started:
 1. Install the Desktop development with C++ workload from Microsoft Visual Studio Build Tools.
 2. Launch the Developer Command Prompt for VS
-3. Navigate to this repository (e.g. `cd \Users\jdaily\Documents\GitHub\ShimDLL\`)
-4. Compile the source: `cl.exe simpleRP1210.c`
+3. Navigate to this repository (e.g. ```cd  %USERPROFILE%\Documents\GitHub\ShimDLL\```)
+4. Compile the source: ```cl.exe simpleRP1210.c```
 The output may be something like this:
 ```
 Microsoft (R) C/C++ Optimizing Compiler Version 19.36.32532 for x86
@@ -28,8 +28,8 @@ Copyright (C) Microsoft Corporation.  All rights reserved.
 /out:simpleRP1210.exe
 simpleRP1210.obj
 ```
-5. Connect an RP1210 device to a J1939 network (e.g. DPAXL)
-6. Run the command. For example `simpleRP1210.exe DGDPAXL.dll 1`. The output should look something like this:
+5. Connect an RP1210 device to a J1939 network (e.g. DGDPAXL)
+6. Run the command. For example ```simpleRP1210.exe DGDPAXL.dll 1```. The output should look something like this:
 ```
 Starting the simpleRP1210 program.
 Command-line Arguments:
@@ -82,7 +82,13 @@ To install the compiler, download the Build Tools Microsoft Visual Studio 2022.
 
 https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022
 
+Running the installer should give a window that looks like this and you can select the Modify button.
+![VisualStudioInstaller.png](VisualStudioInstaller.png)
 
+Visual Studio is pretty big, so we want to keep the installation minimal. Select only the Desktop development with C++ under the Workloads tab, then press install or close.
+![ModifyingVisualStudioBuildTools.png](ModifyingVisualStudioBuildTools.png)
+
+This should setup our build environment in Windows.
 
 
 ### Visual Studio Code
@@ -98,4 +104,4 @@ Be sure `%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code` is in your syst
 ![Developer Command Prompt](DeveloperCommandPromptScreenshot.png)
 
 # Making a Shim DLL
-The conceptual idea of the ShimDLL is for the ShimDLL to present itself to a legitimate program. The ShimDLL will then connect to the real RP1210 driver to keep all the functionallity. The ShimDLL will communicate with the legitimate program using local sockets for interprocess communications.
+The conceptual idea of the ShimDLL is for the ShimDLL to present itself to a legitimate program. The ShimDLL will then connect to the real RP1210 driver to keep all the functionality. The ShimDLL will communicate with the legitimate program using local sockets for interprocess communications.
