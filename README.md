@@ -103,5 +103,18 @@ Be sure `%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code` is in your syst
 
 ![Developer Command Prompt](DeveloperCommandPromptScreenshot.png)
 
+Once the command prompt is open, you can navigate to this repsitory on your local computer:
+```
+cd  %USERPROFILE%\Documents\GitHub\ShimDLL\
+```
+
+Then, launch Visual Studio Code from the command prompt to make sure the development environment is available to VSCode.
+```
+code .
+```
+![CommandPromptScreenShot.png](CommandPromptScreenShot.png)
+
+This will pull up a Visual Studio Code window and the build process can be exercised in a terminal by pressing `Ctrl+Shift+B`.
+
 # Making a Shim DLL
 The conceptual idea of the ShimDLL is for the ShimDLL to present itself to a legitimate program. The ShimDLL will then connect to the real RP1210 driver to keep all the functionality. The ShimDLL will communicate with the legitimate program using local sockets for interprocess communications.
