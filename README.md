@@ -157,3 +157,11 @@ There are many comments and printed debug statements in `simpleRP1210.c` for you
 The conceptual idea of the ShimDLL is for the ShimDLL to present itself to a legitimate program. The ShimDLL will then connect to the real RP1210 driver to keep all the functionality. The ShimDLL will communicate with the legitimate program using local sockets for interprocess communications.
 
 The ShimDLL will be loaded by SimpleRP1210.exe, so it can manipulate the data.
+
+An example in `shimDLL.c` has the data for the VIN get changed.
+
+The result came from a test with the command `simpleRP1210.exe shimDLL.dll 1`. These executables need to be built.
+
+![ATTACKResults.png](ATTACKResults.png)
+
+Recall the actual VIN should be `1HSHWSJNXDJ195555*`.
