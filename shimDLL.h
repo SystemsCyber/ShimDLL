@@ -1,6 +1,6 @@
 #include <windows.h>
 
-void WINAPI LoadExternalLibaries(void );
+#define TXRXSIZE 				4200 
 
 /* Prototypes for RP1210 */
 /* These are explicitly defined in the RP1210 API document. */

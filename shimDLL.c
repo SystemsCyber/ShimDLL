@@ -9,17 +9,18 @@ simpleRP1210.exe shimDLL.dll 1
 
 */
 #include "shimDLL.h"
-//#include "simpleRP1210.h"
 #include <stdio.h>
 #include <string.h>
-//#include <socketapi.h>
+
+/* Enabling Logging is slow now and the recieve buffers may overflow.*/
+//#define ENABLE_LOGGING 1 
 
 HMODULE dll_module;
 FILE* hLogFile;
 const char* logFileName = "log.txt";
-const char* xternal_rp1210dll_name = "DGDPAXL.dll";
+const char* xternal_rp1210dll_name = "DGDPA5SA.dll";
 
-char databytes[4];
+char databytes[5];
 char messagelog[500];
 
 /* Declare RP1210 functions to be loaded from the external DLL*/
@@ -53,31 +54,30 @@ short __declspec(dllexport) WINAPI RP1210_ClientConnect(
 
     status = Xternal_RP1210_ClientConnect(hwndClient, nDeviceID, 
 			fpchProtocol, lTxBufferSize, lRxBufferSize, nIsAppPacketizingInMsgs);
-    
+#ifdef  ENABLE_LOGGING
     sprintf_s(messagelog,sizeof(messagelog),
         "\n\nXX,CC,%02d,%d,\"%s\",%ld,%ld,%d",
 		status,nDeviceID,fpchProtocol,lTxBufferSize,lRxBufferSize,nIsAppPacketizingInMsgs );
     fopen_s(&hLogFile, logFileName, "a+");
     fwrite(messagelog, sizeof(char), strlen(messagelog), hLogFile);
     fclose(hLogFile);
-
+#endif
     return(status);
 }
 
-short __declspec(dllexport) WINAPI RP1210_ClientDisconnect( 
-                                        short	nClientID ){
+short __declspec(dllexport) WINAPI RP1210_ClientDisconnect(short nClientID ){
     int status = ERR_DLL_NOT_INITIALIZED;
     if (Xternal_RP1210_ClientDisconnect != NULL){
         status = Xternal_RP1210_ClientDisconnect(nClientID);
     }
-    char messagelog[200];
-    sprintf_s(messagelog,200,
+#ifdef  ENABLE_LOGGING
+    sprintf_s(messagelog,sizeof(messagelog),
         "%02d,CD,%02d\n",
-		status,nClientID);
+		nClientID,status);
     fopen_s(&hLogFile, logFileName, "a+");
     fwrite(messagelog, sizeof(char), strlen(messagelog), hLogFile);
     fclose(hLogFile);
-
+#endif
     return(status);
 }
 
@@ -95,19 +95,19 @@ short __declspec(dllexport) WINAPI RP1210_SendMessage(
 					nNotifyStatusOnTx,
 					nBlockOnSend);
     }
-    // /* Make a print of the data bytes*/
-    // char databytes[4100];
-    // for (int i = 0; i<(3*nMessageSize); i+=3){
-    //     sprintf_s(&databytes[i],3,",%02X", fpchClientMessage[i] );
-    // }
-    // char messagelog[5000];
-    // sprintf_s(messagelog,5000,
-    //     "%02d,SM,%02d,%02d,%02d,%d%s\n",
-	// 	status,nClientID,nBlockOnSend,nNotifyStatusOnTx,nMessageSize,databytes);
-    // fopen_s(&hLogFile, logFileName, "a+");
-    // fwrite(messagelog, sizeof(char), strlen(messagelog), hLogFile);
-    // fclose(hLogFile);
-
+#ifdef  ENABLE_LOGGING
+    /* Make a print of the data bytes*/
+    sprintf_s(messagelog,sizeof(messagelog),
+        "\n%02d,SM,%d,%d,%d,%d",
+		nClientID,nBlockOnSend,nNotifyStatusOnTx,status,nMessageSize);
+    fopen_s(&hLogFile, logFileName, "a+");
+    fwrite(messagelog, sizeof(char), strlen(messagelog), hLogFile);
+    for (int i = 0; i<(nMessageSize); i++){
+        sprintf_s(databytes,4,",%02X", fpchClientMessage[i] );
+        fwrite(databytes,sizeof(char), strlen(databytes), hLogFile);
+    }
+    fclose(hLogFile);
+#endif
     return(status);                                           
 }
 
@@ -124,7 +124,7 @@ short __declspec(dllexport) WINAPI RP1210_ReadMessage(
 					nBlockOnRead);
     }
     /* Make a print of the data bytes*/
-
+#ifdef  ENABLE_LOGGING
     sprintf_s(messagelog,sizeof(messagelog),
         "\n%02d,RM,%d,%d,%d",
 		nClientID,nBlockOnRead,nBufferSize,status);
@@ -135,7 +135,7 @@ short __declspec(dllexport) WINAPI RP1210_ReadMessage(
         fwrite(databytes,sizeof(char), strlen(databytes), hLogFile);
     }
     fclose(hLogFile);
-
+#endif
     return(status);     
 }
 
@@ -151,13 +151,8 @@ short __declspec(dllexport) WINAPI RP1210_SendCommand(
                                              fpchClientCommand,
                                              nMessageSize);
     }
-    
+#ifdef  ENABLE_LOGGING    
     /* Make a print of the data bytes*/
-    char databytes[200];
-    for (int i = 0; i<(3*nMessageSize); i+=3){
-        sprintf_s(&databytes[i],3,",%02X", fpchClientCommand[i] );
-    }
-
     sprintf_s(messagelog,sizeof(messagelog),
         "\n%02d,SC,%d,%d,%d",
 		nClientID,status,nCommandNumber,nMessageSize);
@@ -168,7 +163,7 @@ short __declspec(dllexport) WINAPI RP1210_SendCommand(
         fwrite(databytes,sizeof(char), strlen(databytes), hLogFile);
     }
     fclose(hLogFile);
-
+#endif
     return(status);                 
 }
 

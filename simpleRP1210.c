@@ -28,6 +28,10 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
+/* To compile, use this command: 
+    cl.exe simpleRP1210.c
+*/
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
@@ -160,7 +164,7 @@ void main(int argc, // number of strings in the argument array with the program 
 
     /* Setup command to have all messages pass.*/
     printf_s("Using RP1210_SendCommand for set filters to pass...");
-    char filterBuffer[2000]="";
+    char filterBuffer[200]="";
     ret_val = RP1210_SendCommand(
         RP1210_SET_FILTERS_TO_PASS, 
 		j1939Client,
@@ -187,7 +191,7 @@ void main(int argc, // number of strings in the argument array with the program 
 
         if (ret_val == 0){
             //no more messages in buffer. Let's sleep while a message arrives
-            Sleep(.0002); 
+            //Sleep(.0001); 
         }
         else if (ret_val > 0) { //ret_val is the size of message that was read
             ulReadCount++;
