@@ -47,7 +47,11 @@ SENDMESSAGE RP1210_SendMessage = NULL;
 void main(int argc, // number of strings in the argument array with the program name as 1
           char *argv[] // pointer to the array of command line argument strings
          ){
-
+    
+    printf_s("Starting the simpleRP1210 program.\n");
+    
+    /* Check to see if there are the right amount of arguments. This program takes the first argument to 
+    be the dll filename for the RP1210 device and the second argument is the Device ID, which is usually a number.*/
     if (argc < 3){ 
         printf_s("%s requires 2 command line arguments, which are the RP1210 dll file and the device ID.\n", argv[0]);
         printf_s("Example for a DPA5 Dual CAN:\n\t%s DGDPA5MA.dll 1\n\n", argv[0]);
@@ -57,7 +61,7 @@ void main(int argc, // number of strings in the argument array with the program 
         return;
     }
 
-    printf_s("\nCommand-line Arguments:\n");
+    printf_s("Command-line Arguments:\n");
     for (int i = 0; i < argc; i++){
         printf_s( "argv[%d]: %s\n", i, argv[i]);
     }
@@ -70,7 +74,7 @@ void main(int argc, // number of strings in the argument array with the program 
    
     //check to see if the name has .dll
     char *arg_substring = strstr(rp1210dll_name, ".dll");
-    printf_s("argument substring is %s\n",arg_substring);
+    printf_s("Argument substring is %s\n",arg_substring);
     if (strcmp(arg_substring, ".dll") == 0){
         printf_s("Great! The first command line argument has .dll in it. There's a chance it is an RP1210 filename.\n");
     }
@@ -149,6 +153,7 @@ void main(int argc, // number of strings in the argument array with the program 
         printf_s("There is and issue in connecting to the client. Please be sure to have a the correct device "\
         "plugged in and connected to an operating J1939 network. The device and DLL and device ID must match. "\
         "The error code of %d can be looked up in teh RP1210 documentation.",j1939Client);
+        RP1210_ClientDisconnect(j1939Client);
         FreeLibrary(dll_module);
         return;
     }

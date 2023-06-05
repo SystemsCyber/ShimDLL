@@ -55,17 +55,19 @@ char *rp1210dll_name;
 /***********************/
 /* function Types from RP1210 manual*/
 /***********************/
-typedef int  (WINAPI *CLIENTCONNECT) (HWND, short, char *, long, long, int);
-typedef int  (WINAPI *SENDCOMMAND)(short, short, char *, short);
-typedef int  (WINAPI *READMESSAGE)(short, char *, short, short);
-typedef int  (WINAPI *SENDMESSAGE)(short, char *, short, short, short);
+typedef int  (WINAPI *CLIENTCONNECT) (HWND, short, const char *, long, long, int);
+typedef int  (WINAPI *SENDCOMMAND)(short, short, unsigned char *, short);
+typedef int  (WINAPI *READMESSAGE)(short, unsigned char *, short, short);
+typedef int  (WINAPI *SENDMESSAGE)(short, unsigned char *, short, short, short);
 typedef int  (WINAPI *CLIENTDISCONNECT) (short);
 typedef int  (WINAPI *GETHARDWARESTATUS)(short, char *, short, short);
 typedef int  (WINAPI *GETHARDWARESTATUSEX)(short, char *, short, short);
 typedef int  (WINAPI *GETERRORMESSAGE)(short, char *);
-typedef void (WINAPI *READVERSION)(char *, char *, char *, char *);
+typedef void   (WINAPI *READVERSION)(char *, char *, char *, char *);
 typedef int  (WINAPI *IOCTL)(short, long, void *, void *);
 typedef int  (WINAPI *READDETAILEDVERSION)(short, char *, char *, char *);
+
+
 
 /*	Constants	*/
 /*	RP1210D SendCommand Defines	*/
