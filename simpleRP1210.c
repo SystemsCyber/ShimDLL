@@ -191,7 +191,7 @@ void main(int argc, // number of strings in the argument array with the program 
 
         if (ret_val == 0){
             //no more messages in buffer. Let's sleep while a message arrives
-            //Sleep(.0001); 
+            Sleep(.0001); 
         }
         else if (ret_val > 0) { //ret_val is the size of message that was read
             ulReadCount++;
