@@ -39,6 +39,10 @@
 
 #include "simpleRP1210.h"
 
+#define PGN4VIN					65260 // The PGN for vehicle identification number (VIN)
+#define PGN4VEHICLEDISTANCE     65248 // The PGN for vehicle distance (Odometer)
+
+
 /* Declare RP1210 functions to be loaded from the external DLL*/
 READVERSION RP1210_ReadVersion = NULL;
 GETERRORMESSAGE RP1210_GetErrorMsg = NULL;
@@ -222,6 +226,10 @@ void main(int argc, // number of strings in the argument array with the program 
             if (pgn == PGN4VIN){ // Look for the VIN to break
                 printf_s("Found PGN %d\n",pgn);
                 break;
+            }
+            else if (pgn == PGN4VEHICLEDISTANCE){
+                printf_s("Found PGN %d\n",pgn);
+                //break;
             }
         }
         else //negative number indicates an error

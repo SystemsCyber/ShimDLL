@@ -34,7 +34,7 @@
 #define REQEST_PGN 				0xEA00 // The J1939 parameter group number to make requests
 #define TOOL_SOURCE_ADDRESS 	249 // The Source address for an off-board diagnostics tool
 #define GLOBAL_ADDRESS			255 // The J1939 global source address
-#define PGN4VIN					65260 // The PGN for vehicle identification number (VIN)
+
 #define TXRXSIZE 				4200 // A large buffer for RP1210 messages. The largest one is 4096 for ISO TP messages
 #define DATASTART_J1939			10 // The start position in the buffer for J1939 data
 
