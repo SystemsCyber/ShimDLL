@@ -25,7 +25,9 @@ FILE* hLogFile;
 const char* logFileName = "log.txt";
 
 /*TODO: This value needs to be read from a file.*/
-const char* xternal_rp1210dll_name = "DGDPA5SA.dll";
+
+//const char* xternal_rp1210dll_name = "DGDPA5SA.dll";
+const char* xternal_rp1210dll_name = "CIL7R32.dll";
 
 char databytes[4];
 char messagelog[500];

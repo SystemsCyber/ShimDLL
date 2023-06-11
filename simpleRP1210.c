@@ -65,7 +65,8 @@ void main(int argc, // number of strings in the argument array with the program 
         printf_s("Example for a DPA5 Dual CAN:\n\t%s DGDPA5MA.dll 1\n\n", argv[0]);
         printf_s("Example for a DPA5 Pro:\n\t%s DGDPA5MA.dll 2\n\n", argv[0]);
         printf_s("Example for a DPAXL:\n\t%s DGDPAXL.dll 1\n\n", argv[0]);
-        printf_s("Example for a Cummins Inline 7):\n\t%s CIL7R32.dll 1\n\n", argv[0]);
+        printf_s("Example for a Cummins Inline 7:\n\t%s CIL7R32.dll 1\n\n", argv[0]);
+        printf_s("Example for the Shim DLL:\n\t%s ShimDLL.dll 1\n\n", argv[0]);
         return;
     }
 
