@@ -1,0 +1,41 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "time_format": {
+            "class": "logging.Formatter",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+            "format": "%(asctime)s %(message)s"
+        },
+        "simple": {
+            "format": "%(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",
+            "formatter": "simple",
+            "stream": "ext://sys.stdout"
+        },
+        "file_handler": {
+            "class": "logging.FileHandler",
+            "level": "DEBUG",
+            "formatter": "time_format",
+            "filename": "RP1210Session.log",
+            "mode": "w",
+            "encoding": "utf8",
+            "delay": false
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": [
+                "console",
+                "file_handler"
+            ],
+            "level": "DEBUG",
+            "propagate": false
+        }
+    }
+}
