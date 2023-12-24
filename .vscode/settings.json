@@ -2,6 +2,9 @@
     "files.associations": {
         "loaddll.h": "c",
         "stdio.h": "c",
-        "xstring": "c"
+        "xstring": "c",
+        "shimdllserver.h": "c",
+        "string.h": "c",
+        "windows.h": "c"
     }
 }
