@@ -1,4 +1,10 @@
+/*
+Compile with this command in the Developer Command Prompt for VS
+cl.exe /LINK  ws2_32.lib echo_service.c
+*/
+
 #include <winsock2.h>
+#include <ws2tcpip.h>
 #include <stdio.h>
 #include <process.h> // For _beginthreadex
 
@@ -25,7 +31,7 @@ void echoThread(void* param) {
     // Bind the UDP socket to the specified port
     struct sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_addr.s_addr = INADDR_ANY;
+    inet_pton(AF_INET, "127.0.0.1", &(serverAddress.sin_addr));
     serverAddress.sin_port = htons(port);
 
     int enable = 1;
@@ -73,7 +79,7 @@ void echoThread(void* param) {
             }
 
             printf("Echoed %d bytes back to %s:%d\n", bytesSent,
-                   inet_ntoa(clientAddress.sin_addr), ntohs(clientAddress.sin_port));
+                   inet_ntoa(serverAddress.sin_addr), ntohs(serverAddress.sin_port));
         }
     }
 
@@ -90,7 +96,7 @@ int main() {
         return EXIT_FAILURE;
     }
 
-    int ports[NUM_THREADS] = { 12352, 12354 };
+    int ports[NUM_THREADS] = {  12354, 12352 };
 
     // Create threads
     HANDLE threads[NUM_THREADS];

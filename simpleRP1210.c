@@ -192,14 +192,15 @@ void main(int argc, // number of strings in the argument array with the program 
             j1939Client, //client handle
             &ucTxRxBuffer[0], //pointer to the buffer where read data goes
             TXRXSIZE,      //maximum size of read message                
-            FALSE);    //Blocking setting
+            TRUE);    //Blocking setting
 
         if (ret_val == 0){
             //no more messages in buffer. Let's sleep while a message arrives
-            Sleep(.0001); 
+            //Sleep(.0001); 
         }
         else if (ret_val > 0) { //ret_val is the size of message that was read
             ulReadCount++;
+            printf_s("%06d: %2d ",ulReadCount,ret_val);
             /* Print out the buffer and the ASCII of the data*/
             for (int i = 0; i < ret_val; i++){
                 printf_s("%02X ", ucTxRxBuffer[i] );

@@ -63,7 +63,7 @@ typedef int  (WINAPI *CLIENTDISCONNECT) (short);
 typedef int  (WINAPI *GETHARDWARESTATUS)(short, char *, short, short);
 typedef int  (WINAPI *GETHARDWARESTATUSEX)(short, char *, short, short);
 typedef int  (WINAPI *GETERRORMESSAGE)(short, char *);
-typedef void   (WINAPI *READVERSION)(char *, char *, char *, char *);
+typedef void (WINAPI *READVERSION)(char *, char *, char *, char *);
 typedef int  (WINAPI *IOCTL)(short, long, void *, void *);
 typedef int  (WINAPI *READDETAILEDVERSION)(short, char *, char *, char *);
 

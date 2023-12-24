@@ -3,14 +3,13 @@
 #define TXRXSIZE 				4200 
 
 void setupShimSocket(void);
-void setupShimSocket(char *xternal_rp1210dll_name);
 
 /* Prototypes for RP1210 */
 /* These are explicitly defined in the RP1210 API document. */
 short __declspec(dllexport) WINAPI RP1210_ClientConnect( 
                                         HWND    hwndClient,
 										short 	nDeviceID,
-                                       	const char *fpchProtocol,
+                                       	char    *fpchProtocol,
                                        	long	lTxBufferSize,
                                         long    lRxBufferSize,
                                         short   nIsAppPacketizingInMsgs );
@@ -67,7 +66,7 @@ short __declspec(dllexport) WINAPI RP1210_GetErrorMsg(
 
 short __declspec(dllexport) WINAPI RP1210_GetLastErrorMsg(
                                         short   errorCode,
-										short     *SubErrorCode,
+										int     *SubErrorCode,
 										char    *fpchDescription,
 										short   nClientID );
 
@@ -264,16 +263,16 @@ typedef unsigned long UL;
 /***********************/
 /* function Types from RP1210 manual*/
 /***********************/
-typedef short  (WINAPI* CLIENTCONNECT) (HWND, short, const char*, long, long, short);
+typedef short  (WINAPI* CLIENTCONNECT) (HWND, short, char*, long, long, short);
 typedef short  (WINAPI* CLIENTDISCONNECT) (short);
 typedef short  (WINAPI* SENDMESSAGE)(short, unsigned char*, short, short, short);
-typedef short  (WINAPI* SENDCOMMAND)(short, short, unsigned char*, short);
 typedef short  (WINAPI* READMESSAGE)(short, unsigned char*, short, short);
-typedef short  (WINAPI* GETHARDWARESTATUS)(short, unsigned char*, short, short);
-typedef short  (WINAPI* GETHARDWARESTATUSEX)(short, unsigned char*, short, short);
-typedef short  (WINAPI* GETERRORMESSAGE)(short, unsigned char*);
-typedef short  (WINAPI* GETLASTERRORMESSAGE)(short, int, char *,short);
+typedef short  (WINAPI* SENDCOMMAND)(short, short, unsigned char*, short);
 typedef void   (WINAPI* READVERSION)(char *, char *, char *, char *);
-typedef short  (WINAPI* IOCTL)(short, long, void *, void *);
+typedef short  (WINAPI* GETERRORMESSAGE)(short, unsigned char*);
+typedef short  (WINAPI* GETLASTERRORMESSAGE)(short, int *, char *, short);
+typedef short  (WINAPI* GETHARDWARESTATUS)(short, unsigned char*, short, short);
+typedef short  (WINAPI* GETHARDWARESTATUSEX)(short, unsigned char*);
 typedef short  (WINAPI* READDETAILEDVERSION)(short, char *, char *, char *);
+typedef short  (WINAPI* IOCTL)(short, long, void *, void *);
 
