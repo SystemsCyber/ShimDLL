@@ -1,4 +1,4 @@
-LIBRARY shimDLL.dll
+LIBRARY SocketShimDLL.dll
 
 EXPORTS
     RP1210_ClientConnect

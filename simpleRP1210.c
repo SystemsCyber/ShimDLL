@@ -44,13 +44,19 @@
 
 
 /* Declare RP1210 functions to be loaded from the external DLL*/
-READVERSION RP1210_ReadVersion = NULL;
-GETERRORMESSAGE RP1210_GetErrorMsg = NULL;
+/* Declare RP1210 functions to be loaded from the external DLL */
 CLIENTCONNECT RP1210_ClientConnect = NULL;
 CLIENTDISCONNECT RP1210_ClientDisconnect = NULL;
-SENDCOMMAND RP1210_SendCommand = NULL;
-READMESSAGE RP1210_ReadMessage = NULL;
 SENDMESSAGE RP1210_SendMessage = NULL;
+READMESSAGE RP1210_ReadMessage = NULL;
+SENDCOMMAND RP1210_SendCommand = NULL;
+READVERSION RP1210_ReadVersion = NULL;
+READDETAILEDVERSION RP1210_ReadDetailedVersion = NULL;
+GETHARDWARESTATUS RP1210_GetHardwareStatus = NULL;
+GETHARDWARESTATUSEX RP1210_GetHardwareStatusEx = NULL;
+GETERRORMESSAGE RP1210_GetErrorMsg = NULL;
+GETLASTERRORMESSAGE RP1210_GetLastErrorMsg = NULL;
+IOCTL RP1210_Ioctl = NULL;
 
 void main(int argc, // number of strings in the argument array with the program name as 1
           char *argv[] // pointer to the array of command line argument strings
@@ -114,6 +120,13 @@ void main(int argc, // number of strings in the argument array with the program 
     RP1210_SendCommand = GetProcAddress(dll_module, "RP1210_SendCommand");
     RP1210_ReadMessage = GetProcAddress(dll_module, "RP1210_ReadMessage");
     RP1210_SendMessage = GetProcAddress(dll_module, "RP1210_SendMessage");
+    RP1210_Ioctl = GetProcAddress(dll_module, "RP1210_Ioctl");
+    RP1210_GetLastErrorMsg = GetProcAddress(dll_module, "RP1210_GetLastErrorMsg");
+    RP1210_GetHardwareStatusEx = GetProcAddress(dll_module, "RP1210_GetHardwareStatusEx");
+    RP1210_GetHardwareStatus = GetProcAddress(dll_module, "RP1210_GetHardwareStatus");
+    RP1210_ReadDetailedVersion = GetProcAddress(dll_module, "RP1210_ReadDetailedVersion");
+    
+    
     //Add other functions here
     printf_s("done.\n");
 
