@@ -12,7 +12,7 @@ SocketRP1210Shim is a middleware software tool developed for vehicle diagnostics
 
 4. **Data Manipulation Capabilities**: Beyond mere analysis, SocketShim empowers users to modify the diagnostic data in transit. This functionality is particularly beneficial for simulating various cybersecurity scenarios, including attack patterns, data integrity checks, and the development of defensive strategies against potential cyber threats.
 
-6. **Application in Cybersecurity Research**: The primary application of SocketRP1210Shim lies in the domain of cybersecurity research. By facilitating detailed analysis and controlled manipulation of diagnostic data, it serves as a valuable tool for researchers focusing on vehicular cybersecurity, particularly in understanding and mitigating risks associated with VDA communications.
+6. **Application in Cybersecurity Research**: The primary application of SocketShim lies in the domain of cybersecurity research. By facilitating detailed analysis and controlled manipulation of diagnostic data, it serves as a valuable tool for researchers focusing on vehicular cybersecurity, particularly in understanding and mitigating risks associated with VDA communications.
 
 ## Components
 
