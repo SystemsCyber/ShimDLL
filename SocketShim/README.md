@@ -1,7 +1,7 @@
 # SocketShim
 
 ## Overview
-SocketRP1210Shim is a middleware software tool developed for vehicle diagnostics cybersecurity research, particularly for heavy vehicles using RP1210 compliant vehicle diagnostic adapters (VDAs). It acts as a shim layer between diagnostic software and VDA's device driver, enabling analysis and manipulation of diagnostic communications.
+SocketShim is a middleware software tool developed for vehicle diagnostics cybersecurity research, particularly for heavy vehicles using RP1210 compliant vehicle diagnostic adapters (VDAs). It acts as a shim layer between diagnostic software and VDA's device driver, enabling analysis and manipulation of diagnostic communications.
 
 ### Key Features and Functions:
 1. **Interception and Redirection**: SocketShim operates by intercepting the communication between the vehicle's diagnostic software and the VDA's device driver.
