@@ -281,13 +281,7 @@ short __declspec(dllexport) WINAPI RP1210_ClientDisconnect(short nClientID ){
     short status = -ERR_DLL_NOT_INITIALIZED;
     if (Xternal_RP1210_ClientDisconnect == NULL) setupShimSocket();
     status = Xternal_RP1210_ClientDisconnect(nClientID);
-    printf("RP1210_ClientDisconnect Called and returned status %d...\n", status);
-    // // Close sockets and clean up Winsock
-    // closesocket(read_server_socket);
-    // closesocket(send_server_socket);
-    // WSACleanup();
-    // printf("Finished closing sockets and WSACleanup");
-    
+       
     memset(messageBuffer,0,sizeof(messageBuffer));
     sprintf(messageBuffer,"Client Disconnect. ClientID: %d, Return Value: %d",nClientID,status);
     send(message_socket, messageBuffer, strlen(messageBuffer), 0);     
@@ -435,7 +429,7 @@ void __declspec(dllexport) WINAPI RP1210_ReadVersion(
                                 fpchAPIMajorVersion, 
                                 fpchAPIMinorVersion);
     memset(messageBuffer,0,sizeof(messageBuffer));
-    sprintf(messageBuffer,"Message: Read Version. DLL Major: %s. DLL Minor: %s, API Major: %s, API Minor: %s",
+    sprintf(messageBuffer,"Read Version. DLL Major: %s. DLL Minor: %s, API Major: %s, API Minor: %s",
                                 fpchDLLMajorVersion, 
                                 fpchDLLMinorVersion, 
                                 fpchAPIMajorVersion, 
@@ -456,7 +450,7 @@ short __declspec(dllexport) WINAPI RP1210_ReadDetailedVersion(
                                                 fpchDLLVersionInfo, 
                                                 fpchFWVersionInfo);
     memset(messageBuffer,0,sizeof(messageBuffer));
-    sprintf(messageBuffer,"Message: Read Detailed Version. ClientID: %d, APIVersionInfo: %s, DLLVersionInfo: %s, FWVersionInfo: %s",
+    sprintf(messageBuffer,"Read Detailed Version. ClientID: %d, APIVersionInfo: %s, DLLVersionInfo: %s, FWVersionInfo: %s",
                                 nClientID,
                                 fpchAPIVersionInfo, 
                                 fpchDLLVersionInfo, 
@@ -478,7 +472,7 @@ short __declspec(dllexport) WINAPI RP1210_GetHardwareStatus(
 
 
     memset(messageBuffer,0,sizeof(messageBuffer));
-    sprintf(messageBuffer,"Message: Get Hardware Status. ClientID: %d, HW Status: %X, status: %d",
+    sprintf(messageBuffer,"Get Hardware Status. ClientID: %d, HW Status: %X, status: %d",
                                 nClientID,
                                 fpchClientInfo, 
                                 status);
@@ -493,7 +487,7 @@ short __declspec(dllexport) WINAPI  RP1210_GetHardwareStatusEx(
     short status = -ERR_DLL_NOT_INITIALIZED;
     status = Xternal_RP1210_GetHardwareStatusEx(nClientID, fpchClientInfo);
     memset(messageBuffer,0,sizeof(messageBuffer));
-    sprintf(messageBuffer,"Message: Get Hardware Status Extended. ClientID: %d, HW Status: %s, status: %d",
+    sprintf(messageBuffer,"Get Hardware Status Extended. ClientID: %d, HW Status: %s, status: %d",
                                 nClientID,
                                 fpchClientInfo, 
                                 status);
@@ -508,7 +502,7 @@ short __declspec(dllexport) WINAPI RP1210_GetErrorMsg(
     short status = -ERR_DLL_NOT_INITIALIZED;
     status = Xternal_RP1210_GetErrorMsg(errorCode, fpchDescription);
     memset(messageBuffer,0,sizeof(messageBuffer));
-    sprintf(messageBuffer,"Message: Get Error Message. Error Code: %d, Description: %s, status: %d",
+    sprintf(messageBuffer,"Get Error Message. Error Code: %d, Description: %s, status: %d",
                                 errorCode,
                                 fpchDescription, 
                                 status);
@@ -525,7 +519,7 @@ short __declspec(dllexport) WINAPI RP1210_GetLastErrorMsg(
     short status = -ERR_DLL_NOT_INITIALIZED;
     status = Xternal_RP1210_GetLastErrorMsg(errorCode, SubErrorCode, fpchDescription, nClientID);
     memset(messageBuffer,0,sizeof(messageBuffer));
-    sprintf(messageBuffer,"Message: Get Error Message. Error Code: %d, Sub Error Code: %d, Description: %s, ClientID: %d, status: %d",
+    sprintf(messageBuffer,"Get Error Message. Error Code: %d, Sub Error Code: %d, Description: %s, ClientID: %d, status: %d",
                                 errorCode,
                                 SubErrorCode,
                                 fpchDescription,
@@ -544,7 +538,7 @@ short __declspec(dllexport) WINAPI RP1210_Ioctl(
     short status = -ERR_DLL_NOT_INITIALIZED;
     status = Xternal_RP1210_Ioctl(nClientID, nIoctlID, pInput, pOutput);
     memset(messageBuffer,0,sizeof(messageBuffer));
-    sprintf(messageBuffer,"Message: Ioctl. IoctlID: %d, ClientID: %d, status: %d",
+    sprintf(messageBuffer,"Ioctl. IoctlID: %d, ClientID: %d, status: %d",
                                 nIoctlID,
                                 nClientID, 
                                 status);
